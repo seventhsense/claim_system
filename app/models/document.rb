@@ -9,10 +9,16 @@ class Document < ActiveRecord::Base
     @id = self.charge.id
     @client_name = self.charge.client.name
     @subject = self.charge.subject
-    @grand_total = self.charge.grand_total
-    @total = self.charge.total
-    @tax = self.charge.tax
+    @grand_total = number_to_currency self.charge.grand_total
+    @total = number_to_currency self.charge.total
+    @tax = number_to_currency self.charge.tax
     @orders = self.charge.orders
     render_odt 'tmp/demand.odt'
+  end
+
+  def number_to_currency(number)
+    # number.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
+    # number.to_s.reverse.scan(/\d{3}|.$/).join(",").reverse
+    ActiveSupport::NumberHelper.number_to_currency(number, {unit: '¥', precision: 0})
   end
 end

@@ -24,8 +24,5 @@ class Charge < ActiveRecord::Base
     self.total + self.tax
   end
 
-  def number_to_currency(number)
-    # number.to_s.reverse.gsub(/(\d{3})(?=\d)/,'\1,').reverse
-    number.to_s.reverse.scan(/\d{3}|.$/).join(",").reverse
-  end
+
 end
