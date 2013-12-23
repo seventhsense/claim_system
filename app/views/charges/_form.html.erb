@@ -1,0 +1,38 @@
+<%= form_for(@charge) do |f| %>
+  <% if @charge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@charge.errors.count, "error") %> prohibited this charge from being saved:</h2>
+
+      <ul>
+      <% @charge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :client_id %>
+    <%= f.collection_select(:client_id, Client.all, :id, :name, prompt: '選択してください') %>
+  </div>
+  <table>
+    <%= f.fields_for :orders do |builder| %>
+      <tr>
+        <td>
+          <%= builder.collection_select(:product_id, Product.all, :id, :name_and_price, prompt: '選択してください') %> 
+        </td>
+        <td>
+          <%= builder.number_field :number %>個
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

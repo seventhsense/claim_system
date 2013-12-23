@@ -1,0 +1,11 @@
+<h2>ダウンロード</h2>
+<%= form_for(@document, url: {action: :create}) do |f| %>
+  <div>
+    <%= f.label 'ファイル名' %>
+    <%= f.text_field :filename %>
+    <%= f.hidden_field :charge_id %>
+    <%= f.hidden_field :filetype %>
+    *拡張子は不要です
+  </div>
+  <%= f.submit %>
+<% end %>
