@@ -13,7 +13,7 @@ class DocumentsController < ApplicationController
 
   private
   def download_odt(document)
-    file_path = 'tmp/'
+    file_path = 'template/'
     downloadfile = 'demand_output.odt'
     document.generate_document
     
