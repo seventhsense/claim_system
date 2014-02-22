@@ -13,7 +13,7 @@ class Document < ActiveRecord::Base
     @total = number_to_currency self.charge.total
     @tax = number_to_currency self.charge.tax
     @orders = self.charge.orders
-    render_odt 'tmp/demand.odt'
+    render_odt 'template/demand.odt'
   end
 
   def number_to_currency(number)
